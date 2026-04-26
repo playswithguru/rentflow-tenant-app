@@ -2508,10 +2508,14 @@ function TenantDetailView({
 
 
 function PaymentsView({
+  userRole,
+  landlordId,
   onLogPayment,
   onSelectPayment,
   onEditPayment,
 }: {
+  userRole?: string;
+  landlordId?: string | null;
   onLogPayment: () => void;
   onSelectPayment: (payment: any) => void;
   onEditPayment: (payment: any) => void;
