@@ -818,9 +818,9 @@ function LandlordDetailView({
           propertyData.map((p: any) => String(p.PropertyID || ""))
         );
   
-        const tenantMap = new Map(
-          tenantData.map((t: any) => [String(t.TenantID || ""), t])
-        );
+          const tenantMap = new Map<string, any>(
+            tenants.map((t: any) => [String(t.TenantID || ""), t])
+          );
   
         setProperties(propertyData);
   
