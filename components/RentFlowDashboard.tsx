@@ -2974,14 +2974,14 @@ function Drawer({
   onOpenModal,
   activeView,
   onChangeView,
+  userRole,
 }: {
   open: boolean;
   onClose: () => void;
-  onOpenModal: (
-    modal: "addLandlord" | "addProperty" | "addUnit" | "addTenant" | "logPayment"
-  ) => void;
+  onOpenModal: (modal: "addLandlord" | "addProperty" | "addUnit" | "addTenant" | "logPayment") => void;
   activeView: ActiveView;
   onChangeView: (view: ActiveView) => void;
+  userRole?: string;
 }) {
   const navItems: { key: ActiveView; label: string }[] = [
     { key: "dashboard", label: "Dashboard" },
