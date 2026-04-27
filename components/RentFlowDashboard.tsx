@@ -656,7 +656,7 @@ function LandlordsView({
             className="w-full rounded-2xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-sky-500 md:max-w-md"
           />
 
-          <div className="flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-2">
             <button
               onClick={() => setViewMode("card")}
               className={`rounded-full px-4 py-2 text-sm font-medium ${
@@ -665,7 +665,7 @@ function LandlordsView({
                   : "border border-slate-300 text-slate-600"
               }`}
             >
-              Grid
+              Card
             </button>
             <button
               onClick={() => setViewMode("grid")}
@@ -675,7 +675,7 @@ function LandlordsView({
                   : "border border-slate-300 text-slate-600"
               }`}
             >
-              Card
+              Grid
             </button>
           </div>
         </div>
@@ -689,8 +689,8 @@ function LandlordsView({
         <div className="rounded-[28px] border border-slate-200 bg-white p-8 text-sm text-slate-500 shadow-sm">
           No landlords found.
         </div>
-      ) : viewMode === "card" ? (
-        <div className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
+      ) : viewMode === "grid" ? (
+        <div className="hidden md:block overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
           <div className="grid grid-cols-7 bg-slate-50 px-6 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">
             <span>Name</span>
             <span>Phone</span>
@@ -1137,7 +1137,7 @@ function PropertiesView({
             className="w-full rounded-2xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-sky-500 md:max-w-md"
           />
 
-          <div className="flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-2">
             <button
               onClick={() => setViewMode("card")}
               className={`rounded-full px-4 py-2 text-sm font-medium ${
@@ -1170,8 +1170,8 @@ function PropertiesView({
         <div className="rounded-[28px] border border-slate-200 bg-white p-8 text-sm text-slate-500 shadow-sm">
           No properties found.
         </div>
-      ) : viewMode === "card" ? (
-        <div className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
+      ) : viewMode === "grid" ? (
+        <div className="hidden md:block overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
           <div className="grid grid-cols-7 bg-slate-50 px-6 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">
             <span>Name</span>
             <span>City</span>
@@ -1601,7 +1601,7 @@ function UnitsView({
             className="w-full rounded-2xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-sky-500 md:max-w-md"
           />
 
-          <div className="flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-2">
             <button
               onClick={() => setViewMode("card")}
               className={`rounded-full px-4 py-2 text-sm font-medium ${
@@ -1634,8 +1634,8 @@ function UnitsView({
         <div className="rounded-[28px] border border-slate-200 bg-white p-8 text-sm text-slate-500 shadow-sm">
           No units found.
         </div>
-      ) : viewMode === "card" ? (
-        <div className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
+      ) : viewMode === "grid" ? (
+        <div className="hidden md:block overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
           <div className="grid grid-cols-8 bg-slate-50 px-6 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">
             <span>Unit</span>
             <span>Property</span>
@@ -2144,7 +2144,7 @@ function TenantsView({
             className="w-full rounded-2xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-sky-500 md:max-w-md"
           />
 
-          <div className="flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-2">
             <button
               onClick={() => setViewMode("card")}
               className={`rounded-full px-4 py-2 text-sm font-medium ${
@@ -2177,111 +2177,146 @@ function TenantsView({
         <div className="rounded-[28px] border border-slate-200 bg-white p-8 text-sm text-slate-500 shadow-sm">
           No tenants found.
         </div>
-      ) : viewMode === "card" ? (
-        <div className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
-          <div className="grid grid-cols-8 bg-slate-50 px-6 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">
-            <span>Name</span>
-            <span>Property</span>
-            <span>Unit</span>
-            <span>Phone</span>
-            <span>Status</span>
-            <span>Rent</span>
-            <span>ID</span>
-            <span>Actions</span>
-          </div>
+  ) : viewMode === "grid" ? (
+    <div className="hidden md:block overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
+      <div className="grid grid-cols-8 bg-slate-50 px-6 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">
+        <span>Name</span>
+        <span>Property</span>
+        <span>Unit</span>
+        <span>Phone</span>
+        <span>Status</span>
+        <span>Rent</span>
+        <span>ID</span>
+        <span>Actions</span>
+      </div>
 
-          {filteredTenants.map((tenant) => (
-            <div
-              key={tenant.TenantID}
-              className="grid grid-cols-8 border-t border-slate-200 bg-white px-6 py-4 text-left text-sm"
+      {filteredTenants.map((tenant) => (
+        <div
+          key={tenant.TenantID}
+          className="grid grid-cols-8 border-t border-slate-200 bg-white px-6 py-4 text-left text-sm"
+        >
+          <span className="font-medium text-slate-900">
+            {tenant.FullName || "-"}
+          </span>
+          <span className="text-slate-600">
+            {getPropertyName(tenant.PropertyID)}
+          </span>
+          <span className="text-slate-600">
+            {getUnitLabel(tenant.UnitID)}
+          </span>
+          <span className="text-slate-600">
+            {tenant.Phone || "-"}
+          </span>
+
+          <span>
+            <span
+              className={`rounded-full px-2 py-1 text-xs font-semibold ${
+                String(tenant.Status || "").toLowerCase() === "active"
+                  ? "bg-emerald-50 text-emerald-700"
+                  : "bg-slate-100 text-slate-600"
+              }`}
             >
-              <span className="font-medium text-slate-900">{tenant.FullName || "-"}</span>
-              <span className="text-slate-600">{getPropertyName(tenant.PropertyID)}</span>
-              <span className="text-slate-600">{getUnitLabel(tenant.UnitID)}</span>
-              <span className="text-slate-600">{tenant.Phone || "-"}</span>
-              <span>
-                <span
-                  className={`rounded-full px-2 py-1 text-xs font-semibold ${
-                    String(tenant.Status || "").toLowerCase() === "active"
-                      ? "bg-emerald-50 text-emerald-700"
-                      : "bg-slate-100 text-slate-600"
-                  }`}
-                >
-                  {tenant.Status || "Unknown"}
-                </span>
-              </span>
-              <span className="text-slate-600">{formatFcfa(tenant.RentAmount || 0)}</span>
-              <span className="font-medium text-slate-900">{tenant.TenantID || "-"}</span>
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() => onSelectTenant(tenant)}
-                  className="text-xs font-medium text-sky-600 hover:underline"
-                >
-                  View
-                </button>
-                <button
-                  onClick={() => onEditTenant(tenant)}
-                  className="text-xs font-medium text-amber-600 hover:underline"
-                >
-                  Edit
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {filteredTenants.map((tenant) => (
+              {tenant.Status || "Unknown"}
+            </span>
+          </span>
+
+          <span className="text-slate-600">
+            {formatFcfa(tenant.RentAmount || 0)}
+          </span>
+
+          <span className="font-medium text-slate-900">
+            {tenant.TenantID || "-"}
+          </span>
+
+          <div className="flex items-center gap-3">
             <button
-              key={tenant.TenantID}
               onClick={() => onSelectTenant(tenant)}
-              className="rounded-[28px] border border-slate-200 bg-white p-6 text-left shadow-sm hover:border-sky-300 hover:bg-sky-50/40"
+              className="text-xs font-medium text-sky-600 hover:underline"
             >
-              <div className="flex items-start justify-between gap-4">
-                <div>
+              View
+            </button>
+
+            <button
+              onClick={() => onEditTenant(tenant)}
+              className="text-xs font-medium text-amber-600 hover:underline"
+            >
+              Edit
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      {filteredTenants.map((tenant) => (
+        <div
+          key={tenant.TenantID}
+          onClick={() => onSelectTenant(tenant)}
+          className="relative cursor-pointer rounded-[28px] border border-slate-200 bg-white p-6 text-left shadow-sm hover:border-sky-300 hover:bg-sky-50/40"
+        >
+          {/* EDIT BUTTON (TOP RIGHT) */}
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                onEditTenant(tenant);
+              }}
+            className="absolute top-4 right-4 text-xs font-medium text-sky-600 bg-slate-50 px-3 py-1 rounded-full border border-slate-200 hover:bg-sky-50"
+            >
+              Edit
+            </button>
+
+                                        
+            <div className="flex items-start justify-between gap-4 pr-16">
+              <div>
+                <div className="flex items-center gap-2">
                   <h2 className="text-lg font-semibold text-slate-900">
                     {tenant.FullName || "-"}
                   </h2>
-                  <p className="mt-1 text-sm text-slate-500">
-                    {getPropertyName(tenant.PropertyID)} • {getUnitLabel(tenant.UnitID)}
-                  </p>
+
+                  <span
+                    className={`rounded-full px-2 py-1 text-xs font-semibold ${
+                      String(tenant.Status || "").toLowerCase() === "active"
+                        ? "bg-emerald-50 text-emerald-700"
+                        : "bg-slate-100 text-slate-600"
+                    }`}
+                  >
+                    {tenant.Status || "Unknown"}
+                  </span>
                 </div>
-                <span
-                  className={`rounded-full px-2 py-1 text-xs font-semibold ${
-                    String(tenant.Status || "").toLowerCase() === "active"
-                      ? "bg-emerald-50 text-emerald-700"
-                      : "bg-slate-100 text-slate-600"
-                  }`}
-                >
-                  {tenant.Status || "Unknown"}
-                </span>
-              </div>
 
-              <div className="mt-5 space-y-2 text-sm text-slate-600">
-                <p>{tenant.Phone || "-"}</p>
-                <p>{tenant.Email || "-"}</p>
-              </div>
-
-              <div className="mt-6 grid grid-cols-2 gap-3 text-sm text-slate-600">
-                <p>Rent: {formatFcfa(tenant.RentAmount || 0)}</p>
-                <p>Deposit: {formatFcfa(tenant.DepositPaid || 0)}</p>
-              </div>
-
-              <div className="mt-6">
-                <p className="text-xs uppercase tracking-wide text-slate-500">
-                  Tenant ID
-                </p>
-                <p className="mt-1 font-medium text-slate-900">
-                  {tenant.TenantID || "-"}
+                <p className="mt-1 text-sm text-slate-500">
+                  {getPropertyName(tenant.PropertyID)} •{" "}
+                  {getUnitLabel(tenant.UnitID)}
                 </p>
               </div>
-            </button>
-          ))}
+            </div>
+
+          <div className="mt-5 space-y-2 text-sm text-slate-600">
+            <p>{tenant.Phone || "-"}</p>
+            <p>{tenant.Email || "-"}</p>
+          </div>
+
+          <div className="mt-6 grid grid-cols-2 gap-3 text-sm text-slate-600">
+            <p>Rent: {formatFcfa(tenant.RentAmount || 0)}</p>
+            <p>Deposit: {formatFcfa(tenant.DepositPaid || 0)}</p>
+          </div>
+
+          <div className="mt-6">
+            <p className="text-xs uppercase tracking-wide text-slate-500">
+              Tenant ID
+            </p>
+            <p className="mt-1 font-medium text-slate-900">
+              {tenant.TenantID || "-"}
+            </p>
+          </div>
         </div>
-      )}
-    </div>
-  );
-}
+      ))}
+       </div>
+     )}
+   </div>
+   );
+   }
 
 function TenantDetailView({
   tenant,
@@ -2620,7 +2655,7 @@ function PaymentsView({
             className="w-full rounded-2xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-sky-500 md:max-w-md"
           />
 
-          <div className="flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-2">
             <button
               onClick={() => setViewMode("card")}
               className={`rounded-full px-4 py-2 text-sm font-medium ${
@@ -2653,8 +2688,8 @@ function PaymentsView({
         <div className="rounded-[28px] border border-slate-200 bg-white p-8 text-sm text-slate-500 shadow-sm">
           No payments found.
         </div>
-      ) : viewMode === "card" ? (
-        <div className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
+      ) : viewMode === "grid" ? (
+        <div className="hidden md:block overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
           <div className="grid grid-cols-7 bg-slate-50 px-6 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">
             <span>Tenant</span>
             <span>Property</span>
@@ -3139,9 +3174,10 @@ function DashboardView({
           </p>
         </div>
 
-        <div className="rounded-full bg-slate-900 px-4 py-2 text-sm font-medium text-white">
-          tenant.playswithguru.com
-        </div>
+          <div className="mt-4 inline-flex w-fit items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-600 shadow-sm md:mt-0">
+            <span className="text-base">🏢</span>
+            <span>Landlord Workspace</span>
+          </div>
       </div>
 
       <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-6">
@@ -3187,12 +3223,12 @@ function DashboardView({
             </div>
 
             <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200">
-              <div className="grid grid-cols-5 bg-slate-50 px-5 py-3 text-xs font-semibold uppercase tracking-wide text-slate-500">
+              <div className="hidden md:grid grid-cols-5 px-5 py-3 text-xs font-semibold uppercase tracking-wide text-slate-500">
                 <span>Tenant</span>
                 <span>Property</span>
                 <span>Unit</span>
                 <span>Outstanding</span>
-                <span>Lease Rent</span>
+                <span>Rent</span>
               </div>
 
               {overdueTenants.length === 0 ? (
@@ -3200,24 +3236,74 @@ function DashboardView({
                   No overdue tenants found.
                 </div>
               ) : (
-                overdueTenants.slice(0, 8).map((tenant: any) => (
-                  <div
-                    key={tenant.TenantID}
-                    className="grid grid-cols-5 border-t border-slate-200 px-5 py-4 text-sm"
-                  >
-                    <span className="font-medium text-slate-900">
-                      {tenant.FullName || "-"}
-                    </span>
-                    <span className="text-slate-600">{tenant.PropertyName || "-"}</span>
-                    <span className="text-slate-600">{tenant.UnitNumber || "-"}</span>
-                    <span className="font-medium text-rose-600">
-                      {formatFcfa(tenant.Balance || 0)}
-                    </span>
-                    <span className="text-slate-700">
-                      {formatFcfa(tenant.RentAmount || 0)}
-                    </span>
+                <>
+                  {/* ✅ MOBILE VIEW (Cards) */}
+                  <div className="md:hidden space-y-3 px-4 pb-4">
+                    {overdueTenants.slice(0, 8).map((tenant: any) => (
+                      <div
+                        key={tenant.TenantID}
+                        className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"
+                      >
+                        <div className="flex items-start justify-between">
+                          <div>
+                            <p className="text-base font-semibold text-slate-900">
+                              {tenant.FullName || "-"}
+                            </p>
+                            <p className="mt-1 text-sm text-slate-500">
+                              {tenant.PropertyName || "-"} • Unit {tenant.UnitNumber || "-"}
+                            </p>
+                          </div>
+
+                          <p className="text-sm font-semibold text-rose-600">
+                            {formatFcfa(tenant.Balance || 0)}
+                          </p>
+                        </div>
+
+                        <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
+                          <div className="rounded-xl bg-slate-50 p-3">
+                            <p className="text-slate-500">Rent</p>
+                            <p className="mt-1 font-semibold text-slate-900">
+                              {formatFcfa(tenant.RentAmount || 0)}
+                            </p>
+                          </div>
+
+                          <div className="rounded-xl bg-slate-50 p-3">
+                            <p className="text-slate-500">Unit</p>
+                            <p className="mt-1 font-semibold text-slate-900">
+                              {tenant.UnitNumber || "-"}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                ))
+
+                  {/* ✅ DESKTOP VIEW (Table stays same) */}
+                  <div className="hidden md:block">
+                    {overdueTenants.slice(0, 8).map((tenant: any) => (
+                      <div
+                        key={tenant.TenantID}
+                        className="grid grid-cols-5 border-t border-slate-200 px-5 py-4 text-sm"
+                      >
+                        <span className="font-medium text-slate-900">
+                          {tenant.FullName || "-"}
+                        </span>
+                        <span className="text-slate-600">
+                          {tenant.PropertyName || "-"}
+                        </span>
+                        <span className="text-slate-600">
+                          {tenant.UnitNumber || "-"}
+                        </span>
+                        <span className="font-medium text-rose-600">
+                          {formatFcfa(tenant.Balance || 0)}
+                        </span>
+                        <span className="text-slate-700">
+                          {formatFcfa(tenant.RentAmount || 0)}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </>
               )}
             </div>
           </section>
